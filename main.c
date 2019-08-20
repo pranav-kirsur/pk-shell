@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-char* HOME[1024];
+
 
 int main()
 {
