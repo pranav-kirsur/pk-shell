@@ -1,3 +1,6 @@
+#include "loop.h"
+#include "shell.h"
+
 void loop()
 {
     char *line;

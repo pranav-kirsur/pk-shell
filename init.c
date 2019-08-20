@@ -1,6 +1,6 @@
 #include <unistd.h>
-
 #include "init.h"
+#include "shell.h"
 
 void init()
 {

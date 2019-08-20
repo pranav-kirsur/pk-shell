@@ -1,6 +1,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "prompt.h"
+#include "shell.h"
 
 void prompt()
 {

@@ -1,8 +1,7 @@
 #include <stdio.h>
-
-
-
-
+#include "shell.h"
+#include "init.h"
+#include "loop.h"
 
 int main()
 {
