@@ -1,5 +1,6 @@
 #include "loop.h"
 #include "shell.h"
+#include "prompt.h"
 
 void loop()
 {
