@@ -14,7 +14,7 @@ init.o: init.h shell.h init.c
 	gcc $(CFLAGS) -c init.c
 
 loop.o: loop.h loop.c prompt.h shell.h 
-	gcc $(CFLAGS) -c prompt.c
+	gcc $(CFLAGS) -c loop.c
 
 .PHONY: clean
 
