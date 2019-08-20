@@ -1,4 +1,4 @@
-void pksh_loop()
+void loop()
 {
     char *line;
     char **args;
@@ -7,5 +7,6 @@ void pksh_loop()
     do
     {
         prompt();
+        status = 1;
     } while (status);
 }
