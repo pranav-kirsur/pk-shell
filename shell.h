@@ -1,7 +1,7 @@
-#IFNDEF __SHELL_H
-#DEFINE __SHELL_H
+#ifndef __SHELL_H
+#define __SHELL_H
 
 /* Contains global variables */
 char* HOME[1024];
 
-#ENDIF
+#endif
