@@ -6,7 +6,7 @@ void pksh_loop()
 
     do
     {
-        /* code */
+        
     } while (status);
     
 
