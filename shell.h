@@ -2,6 +2,6 @@
 #define __SHELL_H
 
 /* Contains global variables */
-char* HOME[1024];
+char* HOME[4096];
 
 #endif

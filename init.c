@@ -5,7 +5,7 @@
 void init()
 {
     //Initialise home directory
-    getcwd(HOME,1024);
+    getcwd(HOME,4096);
     //Do possible error handling
     
     return;    
