@@ -6,8 +6,6 @@ void pksh_loop()
 
     do
     {
-        
+        prompt();
     } while (status);
-    
-
 }
