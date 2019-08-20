@@ -6,7 +6,7 @@ char* HOME[1024];
 int main()
 {
     //Initialise the shell
-    init()
+    init();
 
     //performs shell read print eval for shell
     loop();
