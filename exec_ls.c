@@ -3,6 +3,45 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <pwd.h>
+#include <grp.h>
+#include <time.h>
+#include <stdlib.h>
+
+char *checkpermissions(char *filepath)
+{
+    struct stat filedetails;
+    if (stat(filepath, &filedetails) == -1)
+    {
+        //return NULL if stat can't get the file
+        return NULL;
+    }
+    char *permissions;
+
+    permissions = (char *)malloc(11 * sizeof(char));
+    mode_t mode = filedetails.st_mode;
+    if (S_ISDIR(mode))
+        permissions[0] = 'd';
+    else if (S_ISLNK(mode))
+        permissions[0] = 'l';
+    else
+        permissions[0] = '-';
+    permissions[1] = (mode & S_IRUSR) ? 'r' : '-';
+    permissions[2] = (mode & S_IWUSR) ? 'w' : '-';
+    permissions[3] = (mode & S_IXUSR) ? 'x' : '-';
+    permissions[4] = (mode & S_IRGRP) ? 'r' : '-';
+    permissions[5] = (mode & S_IWGRP) ? 'w' : '-';
+    permissions[6] = (mode & S_IXGRP) ? 'x' : '-';
+    permissions[7] = (mode & S_IROTH) ? 'r' : '-';
+    permissions[8] = (mode & S_IWOTH) ? 'w' : '-';
+    permissions[9] = (mode & S_IXOTH) ? 'x' : '-';
+    permissions[10] = '\0';
+
+    return permissions;
+}
 
 //filter function for scandir which outputs 1 for files not beginning with .
 int filter(const struct dirent *file)
@@ -71,9 +110,30 @@ void exec_ls(char **args)
     //print list of files according to l_flag
     if (l_flag_enabled)
     {
-        printf("total %d\n",number_of_files);
-        
+        for (int i = 0; i < number_of_files; i++)
+        {
+            char *filepath = (char *)malloc(4096 * sizeof(char));
+            strcpy(filepath, dir);
+            strcat(filepath, "/");
+            strcat(filepath, list_of_files[i]->d_name);
 
+            //get file permissions
+            char *permissions = checkpermissions(filepath);
+            struct stat filedetails;
+
+            stat(filepath, &filedetails);
+            int hardlink_number = filedetails.st_nlink;
+
+            //get owner and group name
+            char *owner = getpwuid(filedetails.st_uid)->pw_name;
+            char *group = getgrgid(filedetails.st_gid)->gr_name;
+
+            int size = filedetails.st_size;
+            char *time = (char *)malloc(100 * sizeof(char));
+            strftime(time, 100, "%b %d %H:%M", localtime(&(filedetails.st_ctime)));
+
+            printf("%s %d %s %s %d %s %s\n", permissions, hardlink_number, owner, group, size, time, list_of_files[i]->d_name);
+        }
     }
     else
     {
