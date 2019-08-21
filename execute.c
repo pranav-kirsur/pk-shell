@@ -1,5 +1,6 @@
 #include "execute.h"
 #include <stdlib.h>
+#include <string.h>
 
 void execute(char **args)
 {
@@ -7,7 +8,7 @@ void execute(char **args)
     {
         return;
     }
-    else if(args[0]=="pwd")
+    else if(strcmp(args[0],"pwd"))
     {
         exec_pwd(args);
     }
