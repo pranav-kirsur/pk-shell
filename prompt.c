@@ -26,5 +26,5 @@ void prompt()
     }
 
     //print prompt
-    printf("\n>%s@%s:%s $",user,hostname,current_directory);
+    printf("\n>%s@%s:%s $ ",user,hostname,current_directory);
 }
