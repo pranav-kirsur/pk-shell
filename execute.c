@@ -1,6 +1,7 @@
 #include "execute.h"
 #include "exec_pwd.h"
 #include "exec_cd.h"
+#include "exec_echo.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -18,6 +19,10 @@ void execute(char **args)
     else if(strcmp(args[0],"cd")==0)
     {
         exec_cd(args);
+    }
+    else if(strcmp(args[0],"echo")==0)
+    {
+        exec_echo(args);
     }
     else
     {
