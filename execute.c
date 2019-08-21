@@ -1,6 +1,8 @@
 #include "execute.h"
+#include "exec_pwd.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 void execute(char **args)
 {
@@ -8,9 +10,14 @@ void execute(char **args)
     {
         return;
     }
-    else if(strcmp(args[0],"pwd"))
+    else if(strcmp(args[0],"pwd")==0)
     {
         exec_pwd(args);
     }
+    else
+    {
+        fprintf(stderr,"%s : Command not found",args[0]);
+    }
+    
     return;
 }

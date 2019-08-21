@@ -25,7 +25,7 @@ void loop()
             {
                 break;
             }
-
+            //printf("Command:%s\n",commands[i]);    
             //parse by whitespace characters
             args = parse(commands[i], delim);
             execute(args);

@@ -6,6 +6,6 @@ void exec_pwd(char **args)
 {
     char currentpath[4096];
     getcwd(currentpath, 4096);
-    printf("%s", currentpath);
+    printf("%s\n", currentpath);
     return;
 }
