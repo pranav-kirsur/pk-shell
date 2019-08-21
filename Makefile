@@ -1,5 +1,5 @@
 CFLAGS = -g -Wall
-OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o
+OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o
 
 shell: $(OBJECTS)
 	gcc $(CFLAGS) -o shell $(OBJECTS)
@@ -19,12 +19,17 @@ loop.o: loop.h loop.c prompt.h shell.h parse.h execute.h
 parse.o: parse.c parse.h 
 	gcc $(CFLAGS) -c parse.c
 
-execute.o : execute.h execute.c exec_pwd.h
+execute.o : execute.h execute.c exec_pwd.h exec_cd.h
 	gcc $(CFLAGS) -c execute.c
 
 exec_pwd.o : exec_pwd.h exec_pwd.c
 	gcc $(CFLAGS) -c exec_pwd.c
+
+exec_cd.o : exec_cd.h exec_cd.c shell.h
+	gcc $(CFLAGS) -c exec_cd.c
+
 .PHONY: clean
+
 
 clean:
 	rm shell $(OBJECTS)
