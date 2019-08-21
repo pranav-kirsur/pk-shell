@@ -106,7 +106,11 @@ void exec_ls(char **args)
     {
         number_of_files = scandir(dir, &list_of_files, filter, alphasort);
     }
-
+    if(number_of_files==-1)
+    {
+        perror("pksh: ls");
+        return;
+    }
     //print list of files according to l_flag
     if (l_flag_enabled)
     {
