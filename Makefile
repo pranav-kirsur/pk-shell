@@ -13,8 +13,11 @@ prompt.o: prompt.c prompt.h shell.h
 init.o: init.h shell.h init.c
 	gcc $(CFLAGS) -c init.c
 
-loop.o: loop.h loop.c prompt.h shell.h 
+loop.o: loop.h loop.c prompt.h shell.h parse.h
 	gcc $(CFLAGS) -c loop.c
+
+parse.o: parse.c parse.h 
+	gcc $(CFLAGS) -c parse.c
 
 .PHONY: clean
 

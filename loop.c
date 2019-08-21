@@ -14,7 +14,8 @@ void loop()
     {
         prompt();
         getline(&line, &linesize,stdin);
-        printf("%s",line);
+        
+        //printf("%s",line);
         status = 1;
     } while (status);
 }
