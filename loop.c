@@ -1,36 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "loop.h"
 #include "shell.h"
 #include "prompt.h"
 #include "parse.h"
+#include "execute.h"
 
 void loop()
 {
-    char *line;
-    int linesize = 0;
+    char *line =(char *) malloc(128 * sizeof(char));
+    size_t linesize = 128;
     char **args;
     int status;
-    char* delim = " \t\n\r\f";
+    char *delim = " \t\n\r\f";
 
     do
     {
         prompt();
-        getline(&line, &linesize,stdin);
-        char** commands = parse(line, ";");
-        for(int i=0;i<sizeof(commands);i++)
+        getline(&line, &linesize, stdin);
+        char **commands = parse(line, ";");
+        for (int i = 0; i < sizeof(commands); i++)
         {
-            if(commands[i]==NULL)
+            if (commands[i] == NULL)
             {
                 break;
             }
-            //printf("%s\n",commands[i]);
 
             //parse by whitespace characters
             args = parse(commands[i], delim);
-           
-
+            execute(args);
         }
-        //printf("%s",line);
+        
         status = 1;
     } while (status);
 }
