@@ -3,6 +3,7 @@
 #include "exec_cd.h"
 #include "exec_echo.h"
 #include "exec_ls.h"
+#include "exec_pinfo.h"
 #include "launch.h"
 #include <stdlib.h>
 #include <string.h>
@@ -29,6 +30,10 @@ void execute(char **args)
     else if (strcmp(args[0], "ls") == 0)
     {
         exec_ls(args);
+    }
+    else if (strcmp(args[0],"pinfo")==0)
+    {
+        exec_pinfo(args);
     }
     else
     {
