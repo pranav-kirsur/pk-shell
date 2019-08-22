@@ -2,11 +2,29 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
 void launch(char **args)
 {
+    //We first determine if the process should be run in the background
+    int is_bg = 0;
+    int i;
+    for (i = 0; i < sizeof(args); i++)
+    {
+        if (args[i] == NULL)
+        {
+            break;
+        }
+    }
+    //If & is at end make it a background process
+    if (strcmp(args[i - 1], "&") == 0)
+    {
+        is_bg = 1;
+        args[i-1] = NULL;
+    }
+
     int pid;
     //fork the process
     pid = fork();
@@ -32,12 +50,15 @@ void launch(char **args)
     else
     {
         //we are in parent process
-        //we wait for child process to execute
-        int status;
-        do
+        //we wait for child process to execute if process is foreground
+        if (!is_bg)
         {
-            waitpid(pid, &status, WUNTRACED);
-        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+            int status;
+            do
+            {
+                waitpid(pid, &status, WUNTRACED);
+            } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+        }
     }
     return;
 }
