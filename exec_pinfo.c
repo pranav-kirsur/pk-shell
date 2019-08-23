@@ -49,9 +49,19 @@ void exec_pinfo(char **args)
     strcat(proc_path, "/stat");
     FILE *stream;
     stream = fopen(proc_path, "r");
+    if (stream == NULL)
+    {
+        perror("pksh: pinfo");
+        return;
+    }
     char *line;
     size_t n = 0;
-    getline(&line, &n, stream);
+    int getline_status = getline(&line, &n, stream);
+    if (getline_status == -1)
+    {
+        perror("pksh: pinfo");
+    }
+
     char **parsed_line = parse(line, " ");
 
     printf("PID -- %s\n", pid);

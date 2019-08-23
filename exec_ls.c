@@ -16,6 +16,7 @@ char *checkpermissions(char *filepath)
     struct stat filedetails;
     if (stat(filepath, &filedetails) == -1)
     {
+        perror("pksh: ls");
         //return NULL if stat can't get the file
         return NULL;
     }
@@ -106,7 +107,7 @@ void exec_ls(char **args)
     {
         number_of_files = scandir(dir, &list_of_files, filter, alphasort);
     }
-    if(number_of_files==-1)
+    if (number_of_files == -1)
     {
         perror("pksh: ls");
         return;
@@ -125,7 +126,11 @@ void exec_ls(char **args)
             char *permissions = checkpermissions(filepath);
             struct stat filedetails;
 
-            stat(filepath, &filedetails);
+            int stat_status = stat(filepath, &filedetails);
+            if (stat_status == -1)
+            {
+                perror("pksh: ls");
+            }
             int hardlink_number = filedetails.st_nlink;
 
             //get owner and group name
