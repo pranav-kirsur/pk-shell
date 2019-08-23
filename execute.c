@@ -31,7 +31,7 @@ void execute(char **args)
     {
         exec_ls(args);
     }
-    else if (strcmp(args[0],"pinfo")==0)
+    else if (strcmp(args[0], "pinfo") == 0)
     {
         exec_pinfo(args);
     }
@@ -39,11 +39,6 @@ void execute(char **args)
     {
         launch(args);
     }
-
-    // else
-    // {
-    //     fprintf(stderr,"%s : Command not found",args[0]);
-    // }
 
     return;
 }
