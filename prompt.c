@@ -25,6 +25,6 @@ void prompt()
         strcpy(current_directory,relative_current_directory);   
     }
 
-    //print prompt
-    printf(">%s@%s:%s $ ",user,hostname,current_directory);
+    //print prompt with color
+    printf(">\033[01;96m%s@%s\033[0m:\033[01;33m%s\033[0m $ ",user,hostname,current_directory);
 }
