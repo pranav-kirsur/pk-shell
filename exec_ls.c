@@ -141,7 +141,7 @@ void exec_ls(char **args)
             char *time = (char *)malloc(100 * sizeof(char));
             strftime(time, 100, "%b %d %H:%M", localtime(&(filedetails.st_ctime)));
 
-            printf("%s %d %s %s %d %s %s\n", permissions, hardlink_number, owner, group, size, time, list_of_files[i]->d_name);
+            printf("%s\t%d\t%s\t%s\t%d\t%s\t%s\n", permissions, hardlink_number, owner, group, size, time, list_of_files[i]->d_name);
             free(filepath);
             free(time);
             free(permissions);
