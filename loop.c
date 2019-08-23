@@ -8,8 +8,8 @@
 
 void loop()
 {
-    char *line =(char *) malloc(128 * sizeof(char));
-    size_t linesize = 128;
+    char *line =(char *) malloc(1024 * sizeof(char));
+    size_t linesize = 1024;
     char **args;
     int status;
     char *delim = " \t\n\r\f";
