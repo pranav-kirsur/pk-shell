@@ -14,6 +14,6 @@ void bg_terminate(int signum)
         return;
     }
     char *exit_status = (WIFEXITED(status)) ? "normally" : "abnormally";
-    printf("\n Process with PID %d exited %s\n ", child_pid, exit_status);
+    printf("\n \033[0;91mProcess with PID %d exited %s\033[0m\n ", child_pid, exit_status);
     return;
 }
