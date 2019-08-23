@@ -8,7 +8,7 @@
 
 void loop()
 {
-    char *line =(char *) malloc(1024 * sizeof(char));
+    char *line = (char *)malloc(1024 * sizeof(char));
     size_t linesize = 1024;
     char **args;
     int status;
@@ -17,7 +17,12 @@ void loop()
     do
     {
         prompt();
-        getline(&line, &linesize, stdin);
+        int getline_status = getline(&line, &linesize, stdin);
+        if (getline_status == -1)
+        {
+            //for handling ctrl + d
+            return;
+        }
         char **commands = parse(line, ";");
         for (int i = 0; i < sizeof(commands); i++)
         {
@@ -25,12 +30,12 @@ void loop()
             {
                 break;
             }
-            //printf("Command:%s\n",commands[i]);    
+
             //parse by whitespace characters
             args = parse(commands[i], delim);
             execute(args);
         }
-        
+
         status = 1;
     } while (status);
 }
