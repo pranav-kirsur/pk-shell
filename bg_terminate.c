@@ -25,6 +25,6 @@ void bg_terminate(int signum)
         }
     }
 
-    printf("\n \033[0;91m%s with PID %d exited %s\033[0m\n ", program_name, child_pid, exit_status);
+    fprintf(stderr, "\n \033[0;91m%s with PID %d exited %s\033[0m\n ", program_name, child_pid, exit_status);
     return;
 }
