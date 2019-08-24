@@ -14,4 +14,16 @@ struct pid_name
 struct pid_name bg_proc_names[50];
 int bg_process_index;
 
+//struct to store command history
+struct command_history_struct
+{
+    char command_history_array[1024][20];
+    int command_history_index;
+};
+
+struct command_history_struct command_history;
+
+//path to history file
+char pksh_history_path[4096];
+
 #endif

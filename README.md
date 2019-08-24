@@ -34,3 +34,5 @@ We now proceed to give an overview of the files:
 12. `parse.c` : Parses string according to given delimiter.
 13. `prompt.c` : Prints prompt for the shell
 14. `README.md` : Contains instructions for compiling and running the code. It also contains information about the files.
+15. `history.c` : Contains history function that prints history
+16. `shell.h` : Contains global variables used throughout many functions

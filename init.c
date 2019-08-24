@@ -3,6 +3,12 @@
 #include "bg_terminate.h"
 #include "init.h"
 #include "shell.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 void init()
 {
@@ -22,6 +28,27 @@ void init()
 
     //Initialise bg process index
     bg_process_index = 0;
+
+    //Initialise history array from file if exists
+    strcpy(pksh_history_path, HOME);
+    strcat(pksh_history_path, "/.pksh_history");
+
+    FILE *stream = fopen(pksh_history_path, "r");
+    if (stream == NULL)
+    {
+        //initialize to defaults
+        for (int i = 0; i < 20; i++)
+        {
+            strcpy(command_history.command_history_array[i], "\0");
+        }
+        command_history.command_history_index = 19;
+    }
+    else
+    {
+        //read struct from file
+        fread(&command_history, 1,sizeof(struct command_history_struct) ,stream);
+        fclose(stream);
+    }
 
     return;
 }

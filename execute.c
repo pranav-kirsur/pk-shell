@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "history.h"
 
 void execute(char **args)
 {
@@ -34,6 +35,10 @@ void execute(char **args)
     else if (strcmp(args[0], "pinfo") == 0)
     {
         exec_pinfo(args);
+    }
+    else if (strcmp(args[0], "history") == 0)
+    {
+        history(args);
     }
     else
     {
