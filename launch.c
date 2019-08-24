@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "shell.h"
 
 void launch(char **args)
 {
@@ -22,7 +23,7 @@ void launch(char **args)
     if (strcmp(args[i - 1], "&") == 0)
     {
         is_bg = 1;
-        args[i-1] = NULL;
+        args[i - 1] = NULL;
     }
 
     int pid;
@@ -58,6 +59,16 @@ void launch(char **args)
             {
                 waitpid(pid, &status, WUNTRACED);
             } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+        }
+        else
+        {
+            //store process name and pid in array
+            if (bg_process_index < 50)
+            {
+                bg_proc_names[bg_process_index].pid = pid;
+                strcpy(bg_proc_names[bg_process_index].name, args[0]);
+                bg_process_index++;
+            }
         }
     }
     return;

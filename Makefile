@@ -34,13 +34,13 @@ exec_echo.o : exec_echo.h exec_echo.c
 exec_ls.o : exec_ls.h exec_ls.c shell.h
 	gcc $(CFLAGS) -c exec_ls.c
 
-launch.o: launch.h launch.c
+launch.o: launch.h launch.c shell.h
 	gcc $(CFLAGS) -c launch.c
 
 exec_pinfo.o : exec_pinfo.h exec_pinfo.c parse.h
 	gcc $(CFLAGS) -c exec_pinfo.c
 
-bg_terminate.o : bg_terminate.h bg_terminate.c
+bg_terminate.o : bg_terminate.h bg_terminate.c shell.h
 	gcc $(CFLAGS) -c bg_terminate.c
 
 .PHONY: clean
