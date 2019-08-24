@@ -17,7 +17,7 @@ int bg_process_index;
 //struct to store command history
 struct command_history_struct
 {
-    char command_history_array[1024][20];
+    char command_history_array[20][1024];
     int command_history_index;
 };
 

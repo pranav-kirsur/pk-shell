@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "history.h"
+#include "nightswatch.h"
 
 void execute(char **args)
 {
@@ -39,6 +40,10 @@ void execute(char **args)
     else if (strcmp(args[0], "history") == 0)
     {
         history(args);
+    }
+    else if (strcmp(args[0], "nightswatch") == 0)
+    {
+        nightswatch(args);
     }
     else
     {
