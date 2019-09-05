@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include "history.h"
 #include "nightswatch.h"
+#include "exec_setenv.h"
+#include "exec_unsetenv.h"
 
 void execute(char **args)
 {
@@ -44,6 +46,14 @@ void execute(char **args)
     else if (strcmp(args[0], "nightswatch") == 0)
     {
         nightswatch(args);
+    }
+    else if (strcmp(args[0], "setenv") == 0)
+    {
+        exec_setenv(args);
+    }
+    else if (strcmp(args[0], "unsetenv") == 0)
+    {
+        exec_setenv(args);
     }
     else
     {

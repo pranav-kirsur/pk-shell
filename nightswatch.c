@@ -97,5 +97,4 @@ void nightswatch(char **args)
     {
         return;
     }
-    
 }
