@@ -26,4 +26,12 @@ struct command_history_struct command_history;
 //path to history file
 char pksh_history_path[4096];
 
+//struct to store jobs
+struct job
+{
+    int pid;
+    char name[100];
+    int jobnum;
+}
+
 #endif
