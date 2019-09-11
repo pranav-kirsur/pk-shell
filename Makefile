@@ -1,5 +1,5 @@
 CFLAGS = -g -Wall
-OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o
+OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o linkedlist.o
 
 shell: $(OBJECTS)
 	gcc $(CFLAGS) -o shell $(OBJECTS)
@@ -57,6 +57,9 @@ exec_setenv.o : exec_setenv.h exec_setenv.c countargs.h
 
 exec_unsetenv.o : exec_unsetenv.h exec_unsetenv.c countargs.h
 	gcc $(CFLAGS) -c exec_unsetenv.c
+
+linkedlist.o : linkedlist.h linkedlist.c
+	gcc $(CFLAGS) -c linkedlist.c
 
 
 .PHONY: clean
