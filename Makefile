@@ -58,7 +58,7 @@ exec_setenv.o : exec_setenv.h exec_setenv.c countargs.h
 exec_unsetenv.o : exec_unsetenv.h exec_unsetenv.c countargs.h
 	gcc $(CFLAGS) -c exec_unsetenv.c
 
-linkedlist.o : linkedlist.h linkedlist.c
+linkedlist.o : linkedlist.h linkedlist.c shell.h
 	gcc $(CFLAGS) -c linkedlist.c
 
 
