@@ -1,6 +1,7 @@
 #include "linkedlist.h"
 #include "shell.h"
 #include <stdlib.h>
+#include <string.h>
 
 struct jobNode *head = NULL;
 

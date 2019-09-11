@@ -33,6 +33,6 @@ struct jobNode
     char name[100];
     int jobnum;
     struct jobNode * next;
-}
+};
 
 #endif

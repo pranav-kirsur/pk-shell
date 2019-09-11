@@ -34,7 +34,7 @@ exec_echo.o : exec_echo.h exec_echo.c
 exec_ls.o : exec_ls.h exec_ls.c shell.h
 	gcc $(CFLAGS) -c exec_ls.c
 
-launch.o: launch.h launch.c shell.h
+launch.o: launch.h launch.c shell.h linkedlist.h
 	gcc $(CFLAGS) -c launch.c
 
 exec_pinfo.o : exec_pinfo.h exec_pinfo.c parse.h
@@ -66,4 +66,4 @@ linkedlist.o : linkedlist.h linkedlist.c shell.h
 
 
 clean:
-	rm shell $(OBJECTS)
+	rm shell .pksh_history $(OBJECTS)

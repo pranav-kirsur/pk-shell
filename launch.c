@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "shell.h"
+#include "linkedlist.h"
 
 void launch(char **args)
 {
@@ -69,6 +70,8 @@ void launch(char **args)
                 strcpy(bg_proc_names[bg_process_index].name, args[0]);
                 bg_process_index++;
             }
+            //also add background process to linked list
+
         }
     }
     return;
