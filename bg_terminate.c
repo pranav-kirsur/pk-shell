@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "shell.h"
 #include <string.h>
+#include "linkedlist.h"
 
 void bg_terminate(int signum)
 {
@@ -24,6 +25,9 @@ void bg_terminate(int signum)
             strcpy(program_name, bg_proc_names[i].name);
         }
     }
+    //handles removal from linked list for jobs
+    deleteJobNode(child_pid);
+
 
     fprintf(stderr, "\n \033[0;91m%s with PID %d exited %s\033[0m\n ", program_name, child_pid, exit_status);
     return;

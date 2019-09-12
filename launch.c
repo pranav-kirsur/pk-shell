@@ -71,6 +71,8 @@ void launch(char **args)
                 bg_process_index++;
             }
             //also add background process to linked list
+            struct jobNode * bg_proc_job = createJobNode(pid,args[0]);
+            addJobNode(bg_proc_job);
 
         }
     }

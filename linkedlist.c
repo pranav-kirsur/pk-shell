@@ -5,12 +5,11 @@
 
 struct jobNode *head = NULL;
 
-struct jobNode *createJobNode(int pid, char *name, int jobnum)
+struct jobNode *createJobNode(int pid, char *name)
 {
     struct jobNode *newJobNode = (struct jobNode *)malloc(sizeof(struct jobNode));
     newJobNode->pid = pid;
     strcpy(newJobNode->name, name);
-    newJobNode->jobnum = jobnum;
     newJobNode->next = NULL;
     return newJobNode;
 }
@@ -22,6 +21,8 @@ void addJobNode(struct jobNode *job)
     if (head == NULL)
     {
         head = job;
+        //set jobnum to 1
+        job->jobnum = 1;
         return;
     }
     while (insert->next != NULL)
@@ -29,6 +30,8 @@ void addJobNode(struct jobNode *job)
         insert = insert->next;
     }
     insert->next = job;
+    //adjust job number based on preceding job
+    job->jobnum = insert->jobnum + 1;
     return;
 }
 
@@ -42,7 +45,7 @@ void deleteJobNode(int pid)
         if (curr->pid == pid)
         {
             prev->next = curr->next;
-            if(curr == head)
+            if (curr == head)
             {
                 head = curr->next;
             }
@@ -53,4 +56,10 @@ void deleteJobNode(int pid)
         curr = curr->next;
     }
     return;
+}
+
+//returns the head of the linked list
+struct jobNode *getHead()
+{
+    return head;
 }

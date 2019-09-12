@@ -1,5 +1,5 @@
 CFLAGS = -g -Wall
-OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o linkedlist.o
+OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o linkedlist.o exec_jobs.o
 
 shell: $(OBJECTS)
 	gcc $(CFLAGS) -o shell $(OBJECTS)
@@ -19,7 +19,7 @@ loop.o: loop.h loop.c prompt.h shell.h parse.h execute.h
 parse.o: parse.c parse.h 
 	gcc $(CFLAGS) -c parse.c
 
-execute.o : execute.h execute.c exec_pwd.h exec_cd.h exec_echo.h exec_ls.h launch.h exec_pinfo.h history.h nightswatch.h exec_setenv.h exec_unsetenv.h
+execute.o : execute.h execute.c exec_pwd.h exec_cd.h exec_echo.h exec_ls.h launch.h exec_pinfo.h history.h nightswatch.h exec_setenv.h exec_unsetenv.h exec_jobs.h
 	gcc $(CFLAGS) -c execute.c
 
 exec_pwd.o : exec_pwd.h exec_pwd.c
@@ -40,7 +40,7 @@ launch.o: launch.h launch.c shell.h linkedlist.h
 exec_pinfo.o : exec_pinfo.h exec_pinfo.c parse.h
 	gcc $(CFLAGS) -c exec_pinfo.c
 
-bg_terminate.o : bg_terminate.h bg_terminate.c shell.h
+bg_terminate.o : bg_terminate.h bg_terminate.c shell.h linkedlist.h
 	gcc $(CFLAGS) -c bg_terminate.c
 
 history.o : history.h history.c shell.h
@@ -61,6 +61,8 @@ exec_unsetenv.o : exec_unsetenv.h exec_unsetenv.c countargs.h
 linkedlist.o : linkedlist.h linkedlist.c shell.h
 	gcc $(CFLAGS) -c linkedlist.c
 
+exec_jobs.o : exec_jobs.h exec_jobs.c shell.h linkedlist.h parse.h
+	gcc $(CFLAGS) -c exec_jobs.c
 
 .PHONY: clean
 
