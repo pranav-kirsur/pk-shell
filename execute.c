@@ -13,6 +13,7 @@
 #include "exec_setenv.h"
 #include "exec_unsetenv.h"
 #include "exec_jobs.h"
+#include "exec_kjob.h"
 
 void execute(char **args)
 {
@@ -59,6 +60,10 @@ void execute(char **args)
     else if (strcmp(args[0], "jobs") == 0)
     {
         exec_jobs(args);
+    }
+    else if (strcmp(args[0], "kjob") == 0)
+    {
+        exec_kjob(args);
     }
     else
     {
