@@ -33,6 +33,8 @@ void launch(char **args)
 
     if (pid == 0)
     {
+        //move bg process to its own process group
+        setpgid(0,0);
         //we are in child process
         if (execvp(args[0], args) == -1)
         {
