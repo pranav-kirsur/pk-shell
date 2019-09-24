@@ -19,16 +19,8 @@ void loop()
     do
     {
         prompt();
-        int getline_status = getline(&line, &linesize, stdin);
-        if (getline_status == -1)
-        {
-            //for handling ctrl + d
-            //save history to file
-            FILE *stream = fopen(pksh_history_path, "w");
-            fwrite(&command_history, 1, sizeof(struct command_history_struct), stream);
-            fclose(stream);
-            return;
-        }
+        getline(&line, &linesize, stdin);
+
         //add line to history
         command_history.command_history_index = (command_history.command_history_index + 1) % 20;
         strcpy(command_history.command_history_array[command_history.command_history_index], line);

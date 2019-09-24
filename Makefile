@@ -1,5 +1,5 @@
 CFLAGS = -g -Wall
-OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o linkedlist.o exec_jobs.o exec_kjob.o exec_fg.o exec_bg.o overkill.o quit.o
+OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o linkedlist.o exec_jobs.o exec_kjob.o exec_fg.o exec_bg.o overkill.o quit.o sighandlers.o
 
 shell: $(OBJECTS)
 	gcc $(CFLAGS) -o shell $(OBJECTS)
@@ -10,7 +10,7 @@ main.o: shell.h init.h loop.h main.c
 prompt.o: prompt.c prompt.h shell.h
 	gcc $(CFLAGS) -c prompt.c
 
-init.o: init.h shell.h init.c bg_terminate.h
+init.o: init.h shell.h init.c bg_terminate.h sighandlers.h
 	gcc $(CFLAGS) -c init.c
 
 loop.o: loop.h loop.c prompt.h shell.h parse.h execute.h
@@ -78,6 +78,9 @@ overkill.o : overkill.h overkill.c shell.h linkedlist.h countargs.h
 
 quit.o : quit.h quit.c countargs.h
 	gcc $(CFLAGS) -c quit.c
+
+sighandlers.o : sighandlers.h sighandlers.c 
+	gcc $(CFLAGS) -c sighandlers.c
 
 .PHONY: clean
 

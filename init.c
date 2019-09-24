@@ -3,6 +3,7 @@
 #include "bg_terminate.h"
 #include "init.h"
 #include "shell.h"
+#include "sighandlers.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -17,6 +18,9 @@ void init()
 
     //Attach signal handler for when background process quits
     signal(SIGCHLD, bg_terminate);
+
+    //Attach signal handler for Ctrl + C (SIGINT) , ie ignore it
+    signal(SIGINT,siginthandler);
 
     //Initialise array for storing background process names
     // Support upto 50 background processes
