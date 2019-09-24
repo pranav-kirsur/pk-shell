@@ -17,6 +17,7 @@
 #include "exec_fg.h"
 #include "exec_bg.h"
 #include "overkill.h"
+#include "quit.h"
 
 void execute(char **args)
 {
@@ -79,6 +80,10 @@ void execute(char **args)
     else if (strcmp(args[0], "overkill") == 0)
     {
         overkill(args);
+    }
+    else if (strcmp(args[0], "quit") == 0)
+    {
+        quit(args);
     }
     else
     {
