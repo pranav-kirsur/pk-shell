@@ -15,6 +15,7 @@
 #include "exec_jobs.h"
 #include "exec_kjob.h"
 #include "exec_fg.h"
+#include "exec_bg.h"
 
 void execute(char **args)
 {
@@ -69,6 +70,10 @@ void execute(char **args)
     else if (strcmp(args[0], "fg") == 0)
     {
         exec_fg(args);
+    }
+    else if (strcmp(args[0], "bg") == 0)
+    {
+        exec_bg(args);
     }
     else
     {
