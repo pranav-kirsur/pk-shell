@@ -34,7 +34,10 @@ void launch(char **args)
     if (pid == 0)
     {
         //move bg process to its own process group
-        setpgid(0,0);
+        if (is_bg)
+        {
+            setpgid(0, 0);
+        }
         //we are in child process
         if (execvp(args[0], args) == -1)
         {
@@ -73,9 +76,8 @@ void launch(char **args)
                 bg_process_index++;
             }
             //also add background process to linked list
-            struct jobNode * bg_proc_job = createJobNode(pid,args[0]);
+            struct jobNode *bg_proc_job = createJobNode(pid, args[0]);
             addJobNode(bg_proc_job);
-
         }
     }
     return;

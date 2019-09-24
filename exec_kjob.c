@@ -58,7 +58,7 @@ void exec_kjob(char **args)
     //send signal with error handling
     if (kill(pid, signum) == -1)
     {
-        perror("pksh: kjob:");
+        perror("pksh: kjob");
     }
 
     return;

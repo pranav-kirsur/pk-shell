@@ -1,5 +1,5 @@
 CFLAGS = -g -Wall
-OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o linkedlist.o exec_jobs.o exec_kjob.o exec_fg.o exec_bg.o
+OBJECTS = main.o prompt.o init.o loop.o parse.o execute.o exec_pwd.o exec_cd.o exec_echo.o exec_ls.o launch.o exec_pinfo.o bg_terminate.o history.o nightswatch.o countargs.o exec_setenv.o exec_unsetenv.o linkedlist.o exec_jobs.o exec_kjob.o exec_fg.o exec_bg.o overkill.o
 
 shell: $(OBJECTS)
 	gcc $(CFLAGS) -o shell $(OBJECTS)
@@ -19,7 +19,7 @@ loop.o: loop.h loop.c prompt.h shell.h parse.h execute.h
 parse.o: parse.c parse.h 
 	gcc $(CFLAGS) -c parse.c
 
-execute.o : execute.h execute.c exec_pwd.h exec_cd.h exec_echo.h exec_ls.h launch.h exec_pinfo.h history.h nightswatch.h exec_setenv.h exec_unsetenv.h exec_jobs.h exec_kjob.h exec_fg.h exec_bg.h
+execute.o : execute.h execute.c exec_pwd.h exec_cd.h exec_echo.h exec_ls.h launch.h exec_pinfo.h history.h nightswatch.h exec_setenv.h exec_unsetenv.h exec_jobs.h exec_kjob.h exec_fg.h exec_bg.h overkill.h
 	gcc $(CFLAGS) -c execute.c
 
 exec_pwd.o : exec_pwd.h exec_pwd.c
@@ -73,6 +73,9 @@ exec_fg.o : exec_fg.h exec_fg.c shell.h linkedlist.h countargs.h
 exec_bg.o : exec_bg.h exec_bg.c linkedlist.h shell.h countargs.h
 	gcc $(CFLAGS) -c exec_bg.c
 
+overkill.o : overkill.h overkill.c shell.h linkedlist.h countargs.h
+	gcc $(CFLAGS) -c overkill.c
+ 
 .PHONY: clean
 
 
