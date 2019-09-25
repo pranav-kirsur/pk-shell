@@ -48,8 +48,8 @@ void execute_command(char **args)
                 //close unused file descriptor
                 close(fd);
 
-                //go ahead two steps
-                i += 2;
+                //go ahead a step
+                i += 1;
             }
             else
             {
@@ -89,8 +89,8 @@ void execute_command(char **args)
                 //close unused file descriptor
                 close(fd);
 
-                //go ahead two steps
-                i += 2;
+                //go ahead a step
+                i += 1;
             }
             else
             {
@@ -130,8 +130,8 @@ void execute_command(char **args)
                 //close unused file descriptor
                 close(fd);
 
-                //go ahead two steps
-                i += 2;
+                //go ahead a step
+                i += 1;
             }
             else
             {
