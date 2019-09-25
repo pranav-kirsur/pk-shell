@@ -5,6 +5,7 @@
 #include "prompt.h"
 #include "parse.h"
 #include "execute.h"
+#include "execute_command.h"
 #include <fcntl.h>
 #include <string.h>
 
@@ -35,7 +36,7 @@ void loop()
 
             //parse by whitespace characters
             args = parse(commands[i], delim);
-            execute(args);
+            execute_command(args);
         }
 
         status = 1;
