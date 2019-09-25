@@ -79,7 +79,7 @@ overkill.o : overkill.h overkill.c shell.h linkedlist.h countargs.h
 quit.o : quit.h quit.c countargs.h
 	gcc $(CFLAGS) -c quit.c
 
-sighandlers.o : sighandlers.h sighandlers.c 
+sighandlers.o : sighandlers.h sighandlers.c shell.h linkedlist.h
 	gcc $(CFLAGS) -c sighandlers.c
 
 .PHONY: clean

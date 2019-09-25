@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <string.h>
 
 void exec_fg(char **args)
 {
@@ -36,6 +37,9 @@ void exec_fg(char **args)
             setpgid(job->pid, getpgid(0));
             int pid = job->pid;
 
+            //set current process name as foreground process name
+            strcpy(foreground_process_name, job->name);
+
             //remove process from jobs linked list
             deleteJobNode(pid);
 
@@ -49,12 +53,23 @@ void exec_fg(char **args)
             //send continue signal to process
             kill(pid, SIGCONT);
 
+            //set current process pid as foreground process pid
+            foreground_process_pid = pid;
+
             //wait for process to finish (foreground process)
             int status;
-            do
+            waitpid(pid, &status, WUNTRACED);
+
+            //for handling Ctrl + Z
+            if (WIFSTOPPED(status))
             {
-                waitpid(pid, &status, WUNTRACED);
-            } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+                //add to linked list
+                struct jobNode *job = createJobNode(foreground_process_pid, foreground_process_name);
+                addJobNode(job);
+
+                //since process has been moved to background
+                foreground_process_pid = -1;
+            }
 
             //set parent process group as foreground
             tcsetpgrp(STDIN_FILENO, getpgrp());

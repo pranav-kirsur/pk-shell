@@ -60,11 +60,17 @@ void launch(char **args)
         //we wait for child process to execute if process is foreground
         if (!is_bg)
         {
+            //set pid of current process as foreground process
+            foreground_process_pid = pid;
+
+            //set foreground process name
+            strcpy(foreground_process_name,args[0]);
+            
             int status;
             do
             {
                 waitpid(pid, &status, WUNTRACED);
-            } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+            } while (!WIFEXITED(status) && !WIFSIGNALED(status) && !WIFSTOPPED(status));
         }
         else
         {

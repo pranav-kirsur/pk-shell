@@ -35,4 +35,9 @@ struct jobNode
     struct jobNode * next;
 };
 
+int foreground_process_pid;
+char foreground_process_name[128];
+
+
+
 #endif

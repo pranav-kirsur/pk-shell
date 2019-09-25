@@ -35,6 +35,9 @@ void bg_terminate(int signum)
     if(!is_bg)
     {
         //process is a former background process that was foregrounded
+
+        //change foreground process pid global variable to -1
+        foreground_process_pid = -1;
         return;
     }
 

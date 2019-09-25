@@ -10,17 +10,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <termios.h>
 
 void init()
 {
     //Initialise home directory
     getcwd(HOME, 4096);
 
+    //Set shell inside of its own process group
+    setpgid(getpid(),getpid());
+
+    //Grab control of the terminal
+    tcsetpgrp(STDIN_FILENO,getpid());
+
+    //Set foreground process pid as -1 if no foreground process
+    foreground_process_pid = -1;
+
     //Attach signal handler for when background process quits
     signal(SIGCHLD, bg_terminate);
 
-    //Attach signal handler for Ctrl + C (SIGINT) , ie ignore it
+    //Attach signal handler for Ctrl + C (SIGINT)
     signal(SIGINT,siginthandler);
+
+    //Attach signal handler for Ctrl + Z (SIGTSTP)
+    signal(SIGTSTP,sigtstphandler);
 
     //Initialise array for storing background process names
     // Support upto 50 background processes
