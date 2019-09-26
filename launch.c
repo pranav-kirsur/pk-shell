@@ -34,10 +34,8 @@ void launch(char **args)
     if (pid == 0)
     {
         //move bg process to its own process group
-        if (is_bg)
-        {
-            setpgid(0, 0);
-        }
+        setpgid(0, 0);
+
         //we are in child process
         if (execvp(args[0], args) == -1)
         {
@@ -64,13 +62,32 @@ void launch(char **args)
             foreground_process_pid = pid;
 
             //set foreground process name
-            strcpy(foreground_process_name,args[0]);
-            
+            strcpy(foreground_process_name, args[0]);
+
+            signal(SIGTTIN, SIG_IGN);
+            signal(SIGTTOU, SIG_IGN);
+
+            tcsetpgrp(STDIN_FILENO, pid);
+
             int status;
             do
             {
                 waitpid(pid, &status, WUNTRACED);
             } while (!WIFEXITED(status) && !WIFSIGNALED(status) && !WIFSTOPPED(status));
+
+            tcsetpgrp(STDIN_FILENO, getpgid(0));
+            signal(SIGTTIN, SIG_DFL);
+            signal(SIGTTOU, SIG_DFL);
+
+            if (WIFSTOPPED(status))
+            {
+                if (foreground_process_pid != -1)
+                {
+                    //add to jobs
+                    struct jobNode *job = createJobNode(foreground_process_pid, foreground_process_name);
+                    addJobNode(job);
+                }
+            }
         }
         else
         {

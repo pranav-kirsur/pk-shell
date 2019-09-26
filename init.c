@@ -18,10 +18,10 @@ void init()
     getcwd(HOME, 4096);
 
     //Set shell inside of its own process group
-    setpgid(getpid(),getpid());
+    //setpgid(getpid(),getpid());
 
     //Grab control of the terminal
-    tcsetpgrp(STDIN_FILENO,getpid());
+    //tcsetpgrp(STDIN_FILENO,getpid());
 
     //Set foreground process pid as -1 if no foreground process
     foreground_process_pid = -1;
