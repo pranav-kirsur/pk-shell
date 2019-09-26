@@ -63,9 +63,12 @@ void exec_fg(char **args)
             //for handling Ctrl + Z
             if (WIFSTOPPED(status))
             {
-                //add to linked list
-                struct jobNode *job = createJobNode(foreground_process_pid, foreground_process_name);
-                addJobNode(job);
+                if (foreground_process_pid != -1)
+                {
+                    //add to linked list
+                    struct jobNode *job = createJobNode(foreground_process_pid, foreground_process_name);
+                    addJobNode(job);
+                }
 
                 //since process has been moved to background
                 foreground_process_pid = -1;
