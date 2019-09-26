@@ -6,12 +6,24 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void execute_command(char **args)
+void execute_command(char **args, int input, int output)
 {
 
     //duplicate stdin and stdout descriptors to restore them later
     int stdin_fd = dup(0);
     int stdout_fd = dup(1);
+
+    //replace stdin with given input
+    if (input != 0)
+    {
+        dup2(input, 0);
+    }
+
+    //replace stdout with given output
+    if (output != 1)
+    {
+        dup2(output, 1);
+    }
 
     char **cleanedupargs = (char **)malloc(64 * sizeof(char **));
     int cleanedupargs_index = 0;

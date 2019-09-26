@@ -6,6 +6,7 @@
 #include "parse.h"
 #include "execute.h"
 #include "execute_command.h"
+#include "execute_pipeline.h"
 #include <fcntl.h>
 #include <string.h>
 
@@ -15,8 +16,7 @@ void loop()
     size_t linesize = 1024;
     char **args;
     int status;
-    char *delim = " \t\n\r\f";
-
+    
     do
     {
         prompt();
@@ -34,9 +34,9 @@ void loop()
                 break;
             }
 
-            //parse by whitespace characters
-            args = parse(commands[i], delim);
-            execute_command(args);
+            //parse by pipe symbol
+            args = parse(commands[i], "|");
+            execute_pipeline(args);
         }
 
         status = 1;
