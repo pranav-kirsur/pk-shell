@@ -1,5 +1,5 @@
 # pksh
-pksh is a basic shell that executes commands. It is written in C and uses C library as well as POSIX functions. It supports job control, piping, and redirection. It also supports running commands from history.
+pksh is a basic shell that executes commands. It is written in C and uses C library as well as POSIX functions. It supports job control, piping, and redirection. It also supports running commands from history. Signal handling for Ctrl + C and Ctrl + Z is also present.
 
 # Compiling the code
 Run `make` in the directory containing the shell files.
