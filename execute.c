@@ -18,6 +18,7 @@
 #include "exec_bg.h"
 #include "overkill.h"
 #include "quit.h"
+#include "recall_history.h"
 
 void execute(char **args)
 {
@@ -84,6 +85,12 @@ void execute(char **args)
     else if (strcmp(args[0], "quit") == 0)
     {
         quit(args);
+    }
+    //detect up arrow key
+    else if (args[0][0] == '\033' && args[0][1] == '[' && args[0][2] == 'A')
+    {
+        recall_history(args);
+        return;
     }
     else
     {

@@ -56,7 +56,7 @@ void init()
         //initialize to defaults
         for (int i = 0; i < 20; i++)
         {
-            strcpy(command_history.command_history_array[i], "\0");
+            command_history.command_history_array[i][0] = '\0';
         }
         command_history.command_history_index = 19;
     }
