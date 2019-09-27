@@ -1,5 +1,5 @@
 # pksh
-pksh is a basic shell that executes commands. It is written in C and uses C library as well as POSIX functions.
+pksh is a basic shell that executes commands. It is written in C and uses C library as well as POSIX functions. It supports job control, piping, and redirection. It also supports running commands from history.
 
 # Compiling the code
 Run `make` in the directory containing the shell files.
@@ -37,3 +37,16 @@ We now proceed to give an overview of the files:
 15. `history.c` : Contains history function that prints history
 16. `nightswatch.c`: Contains nightswatch function
 17. `shell.h` : Contains global variables used throughout many functions
+18. `countargs.c` : Contains function that counts the number of arguments from a list
+19. `exec_bg.c` : Contains function that runs a stopped background process
+20. `exec_jobs.c` : Lists jobs that are in the background that were started from shell.
+21. `exec_kjob.c` : Function for sending a signal to a job with given job number
+22. `exec_setenv.c` : Sets an environment variable to a given value
+23. `exec_unsetenv.c` : Unsets value of given environment variable
+24. `execute_command.c` : Executes the given command, either builtin or external
+25. `execute_pipeline.c` : Executes a piped series of commands
+26. `linkedlist.c` : Contains the implementation of the linked list used for job control
+27. `overkill.c` : Contains function that kills all background jobs
+28. `quit.c` : Function to exit the shell
+29. `recall_history.c` : Implements execution of commands from history when up arrow key is pressed
+30. `sighandlers.c` : Contains signal handlers for Ctrl + Z and Ctrl + C
